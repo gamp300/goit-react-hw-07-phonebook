@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from './ContactSlice';
+import { removeContact } from './ContactSlice';
 
 const ContactList = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,10 @@ const ContactList = () => {
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
 
+  const handleDeleteContact = id => {
+    dispatch(removeContact(id));
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -29,6 +34,9 @@ const ContactList = () => {
       {filteredItems.map(contact => (
         <li key={contact.id}>
           <strong>{contact.name}</strong> - {contact.number}
+          <button onClick={() => handleDeleteContact(contact.id)}>
+            Delete
+          </button>
         </li>
       ))}
     </ul>
