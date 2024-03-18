@@ -12,8 +12,13 @@ const Filter = () => {
 
   return (
     <div>
-      Buscar contactos por nombre
-      <input type="text" value={filter} onChange={handleFilterChange} />
+      <label htmlFor="filterInput">Search contacts by name</label>
+      <input
+        id="filterInput"
+        type="text"
+        value={filter}
+        onChange={handleFilterChange}
+      />
     </div>
   );
 };

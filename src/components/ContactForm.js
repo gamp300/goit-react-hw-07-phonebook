@@ -21,10 +21,15 @@ const ContactForm = () => {
       number: trimmedNumber,
     };
 
-    dispatch(addNewContact(newContact));
-
-    setName('');
-    setNumber('');
+    dispatch(addNewContact(newContact))
+      .then(() => {
+        setName('');
+        setNumber('');
+        window.location.reload();
+      })
+      .catch(error => {
+        console.error('Error adding new contact:', error);
+      });
   };
 
   return (

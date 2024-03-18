@@ -18,7 +18,13 @@ const ContactList = () => {
   );
 
   const handleDeleteContact = id => {
-    dispatch(removeContact(id));
+    dispatch(removeContact(id))
+      .then(() => {
+        window.location.reload();
+      })
+      .catch(error => {
+        console.error('Error deleting contact:', error);
+      });
   };
 
   if (isLoading) {
