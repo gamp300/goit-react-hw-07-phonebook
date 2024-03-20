@@ -23,10 +23,12 @@ export const removeContact = createAsyncThunk(
   }
 );
 
-export const setFilter = filter => ({
-  type: 'contacts/setFilter',
-  payload: filter,
-});
+export const setFilter = createAsyncThunk(
+  'contacts/setFilter',
+  async filter => {
+    return filter;
+  }
+);
 
 const ContactSlice = createSlice({
   name: 'contacts',
@@ -50,6 +52,9 @@ const ContactSlice = createSlice({
       .addCase(fetchContacts.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message;
+      })
+      .addCase(setFilter.fulfilled, (state, action) => {
+        state.filter = action.payload;
       });
   },
 });
